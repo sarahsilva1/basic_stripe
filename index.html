@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang=en>
+<head>
+    <meta charset="utf-8">
+    <title>Stripe example</title>
+</head>
+<body>
+  <p id="total">0.5</p>
+
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+  <script src="https://checkout.stripe.com/checkout.js"></script>
+
+  <a id="pay" href="#pay">Pay</a>
+
+  <script>
+      var amount = document.getElementById('total').innerHTML * 100;
+      // Define handler to be called when Stripe returns a card token
+      function onReceiveToken(token, args) {
+          // Submit token to server so it can charge the card
+          $.post( "/charge", {stripeToken: token.id, amount: amount})
+            .done(function( data ) {
+              console.log( "Data Loaded: " + data );
+              // show cart after adding item
+              window.document.location = "../success";
+            });
+      }
+      // Configure Checkout
+      var checkout = StripeCheckout.configure({
+          key: 'pk_test_jlswtH3t6kfKdi6tEYXZ6iH5',
+          token: onReceiveToken,
+          image: 'https://nairteashop.org/wp-content/uploads/avatar.png',
+          name: 'BookFront',
+          description: 'support your bookstore',
+          amount: amount,
+          billingAddress: false
+      });
+      // Open Checkout when the link is clicked
+      $('#pay').on('click', function() {
+          checkout.open();
+          return false;
+      });
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,16 @@
+{
+  "name": "basic_stripe",
+  "version": "1.0.0",
+  "description": "loosely based off of https://nairteashop.org/getting-started-with-stripe-part-2/",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Sarah Silva <ssarrraahh@hotmail.com> (https://github.com/sarahsilva1)",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "express": "^4.14.0",
+    "stripe": "^4.13.0"
+  }
+}
